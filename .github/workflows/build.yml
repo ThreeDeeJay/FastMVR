@@ -50,6 +50,24 @@ jobs:
         --recurse-submodules
         --depth 1
 
+    - name: Clone MathGeoLib
+      run: >
+        git
+        clone https://github.com/juj/MathGeoLib
+        "${{github.workspace}}\dependencies\MathGeoLib"
+        --branch ${{env.Branch}}
+        --recurse-submodules
+        --depth 1
+
+    - name: Clone MathGeoLib
+      run: >
+        git
+        clone https://github.com/fmtlib/fmt
+        "${{github.workspace}}\dependencies\fmt"
+        --branch ${{env.Branch}}
+        --recurse-submodules
+        --depth 1
+
 #    - name: Download Dependencies
 #      run: |
 #        curl --ssl-revoke-best-effort --create-dirs -L "https://raw.githubusercontent.com/OWNER/REPO/refs/heads/BRANCH/PATH/TO/FILE.EXTENSION" -o "PATH/TO/FILE.EXTENSION"
@@ -63,7 +81,7 @@ jobs:
     - name: vcpkg
       if: steps.cache_vcpkg.outputs.cache-hit != 'true'
       run: |
-        vcpkg install glew glfw3 glm fmt --triplet ${{matrix.Settings.Triplet}}
+        vcpkg install glew glfw3 glm fmt tinyobjloader --triplet ${{matrix.Settings.Triplet}}
     - name: List vcpkg files
       run: Get-ChildItem -Path "C:\vcpkg" -File -Recurse | Select-Object FullName
 
@@ -80,10 +98,10 @@ jobs:
         /m "${{env.Solution}}"
         /p:Configuration="${{matrix.Configuration}}"
         /p:PlatformToolset=v143
-        /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"
+        /p:AdditionalIncludePaths="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include;${{github.workspace}}\dependencies\MathGeoLib\src"
 #/p:Platform="${{matrix.Settings.Platform}}"
 #/p:LibPath="C:\Path\to\Lib"
-#/p:AdditionalIncludePaths="C:\Path\to\external\include"
+#/p:IncludePath="C:\Path\to\include"
 #/p:AdditionalLibraryDirectories="C:\Path\to\external\lib"
 #/p:AdditionalDependencies=file.lib
 #/p:LanguageStandard="stdcpp17"
