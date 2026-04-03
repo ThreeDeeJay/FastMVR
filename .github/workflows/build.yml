@@ -55,16 +55,17 @@ jobs:
         git
         clone https://github.com/juj/MathGeoLib
         "${{github.workspace}}\dependencies\MathGeoLib"
-        --recurse-submodules
         --depth 1
+        --recurse-submodules
 
     - name: Clone fmt
       run: >
         git
         clone https://github.com/fmtlib/fmt
         "${{github.workspace}}\dependencies\fmt"
-        --recurse-submodules
+        --revision=c4ee726532178e556d923372f29163bd206d7732
         --depth 1
+        --recurse-submodules
 
 #    - name: Download Dependencies
 #      run: |
