@@ -63,7 +63,7 @@ jobs:
     - name: vcpkg
       if: steps.cache_vcpkg.outputs.cache-hit != 'true'
       run: |
-        vcpkg install glew glfw3 glm --triplet ${{matrix.Settings.Triplet}}
+        vcpkg install glew glfw3 glm fmt --triplet ${{matrix.Settings.Triplet}}
     - name: List vcpkg files
       run: Get-ChildItem -Path "C:\vcpkg" -File -Recurse | Select-Object FullName
 
@@ -80,8 +80,8 @@ jobs:
         /m "${{env.Solution}}"
         /p:Configuration="${{matrix.Configuration}}"
         /p:PlatformToolset=v143
+        /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"
 #/p:Platform="${{matrix.Settings.Platform}}"
-#/p:IncludePath="C:\Path\to\Include"
 #/p:LibPath="C:\Path\to\Lib"
 #/p:AdditionalIncludePaths="C:\Path\to\external\include"
 #/p:AdditionalLibraryDirectories="C:\Path\to\external\lib"
