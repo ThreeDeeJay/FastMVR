@@ -80,12 +80,12 @@ jobs:
     - name: vcpkg
       if: steps.cache_vcpkg.outputs.cache-hit != 'true'
       run: |
-        vcpkg install glew -v 2.2.0 --triplet ${{matrix.Settings.Triplet}}
-        vcpkg install glfw3 -v 3.3.8 --triplet ${{matrix.Settings.Triplet}}
-        vcpkg install glm -v 0.9.9.8 --triplet ${{matrix.Settings.Triplet}}
-        vcpkg install fmt -v 9.0.0 --triplet ${{matrix.Settings.Triplet}}
-        vcpkg install tinyobjloader -v 2.0.0rc13 --triplet ${{matrix.Settings.Triplet}}
-        vcpkg install stb -v 2021-09-10 --triplet ${{matrix.Settings.Triplet}}
+        vcpkg install glew:${{matrix.Settings.Triplet}}@2.2.0
+        vcpkg install glfw3:${{matrix.Settings.Triplet}}@3.3.8
+        vcpkg install glm:${{matrix.Settings.Triplet}}@0.9.9.8
+        vcpkg install fmt:${{matrix.Settings.Triplet}}@9.0.0
+        vcpkg install tinyobjloader:${{matrix.Settings.Triplet}}@2.0.0rc13
+        vcpkg install stb:${{matrix.Settings.Triplet}}@2021-09-10
     - name: List vcpkg files
       run: Get-ChildItem -Path "C:\vcpkg" -File -Recurse | Select-Object FullName
 
