@@ -95,6 +95,8 @@ jobs:
         /p:PlatformToolset=v143
         /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"
         /p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src"
+        /source-charset:utf-8
+        /execution-charset:utf-8
 #/p:Platform="${{matrix.Settings.Platform}}"
 #/p:LibPath="C:\Path\to\Lib"
 #/p:AdditionalLibraryDirectories="C:\Path\to\external\lib"
