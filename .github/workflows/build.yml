@@ -88,16 +88,21 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Set UTF-8
-      run: chcp 65001
+      run: 
 
     - name: Build
-      run: >
-        msbuild
-        /m "${{env.Solution}}"
-        /p:Configuration="${{matrix.Configuration}}"
-        /p:PlatformToolset=v143
-        /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"
-        /p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src"
+      run: |
+        chcp 65001
+        msbuild /m "${{env.Solution}}" /p:Configuration="${{matrix.Configuration}}" /p:PlatformToolset=v143 /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"/p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src"
+
+#    - name: Build
+#      run: >
+#        msbuild
+#        /m "${{env.Solution}}"
+#        /p:Configuration="${{matrix.Configuration}}"
+#        /p:PlatformToolset=v143
+#        /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"
+#        /p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src"
 #/p:Platform="${{matrix.Settings.Platform}}"
 #/p:LibPath="C:\Path\to\Lib"
 #/p:AdditionalLibraryDirectories="C:\Path\to\external\lib"
