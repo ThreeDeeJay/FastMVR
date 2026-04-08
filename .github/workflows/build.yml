@@ -63,9 +63,9 @@ jobs:
         git
         clone https://github.com/fmtlib/fmt
         "${{github.workspace}}\dependencies\fmt"
-        --revision=c4ee726532178e556d923372f29163bd206d7732
         --depth 1
         --recurse-submodules
+#        --revision=c4ee726532178e556d923372f29163bd206d7732
 
 #    - name: Download Dependencies
 #      run: |
@@ -80,7 +80,8 @@ jobs:
     - name: vcpkg
       if: steps.cache_vcpkg.outputs.cache-hit != 'true'
       run: |
-        vcpkg install glew glfw3 glm fmt tinyobjloader stb --triplet ${{matrix.Settings.Triplet}}
+        vcpkg install glew glfw3 glm tinyobjloader stb --triplet ${{matrix.Settings.Triplet}}
+#fmt
     - name: List vcpkg files
       run: Get-ChildItem -Path "C:\vcpkg" -File -Recurse | Select-Object FullName
 
