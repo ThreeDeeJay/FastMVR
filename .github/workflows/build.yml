@@ -87,14 +87,11 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: Set UTF-8
-      run: 
-
     - name: Build
       run: |
-        chcp
-        chcp 65001
-        chcp
+        ECHO A "%CL%" "!CL!"
+        SET CL=/utf-8
+        ECHO B "%CL%" "!CL!"
         msbuild /m "${{env.Solution}}" /p:Configuration="${{matrix.Configuration}}" /p:PlatformToolset=v143 /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"/p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src"
 
 #    - name: Build
