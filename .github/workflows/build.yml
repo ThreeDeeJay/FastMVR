@@ -21,7 +21,7 @@ on:
 jobs:
   Build:
     name: ${{matrix.Settings.Name}}-${{matrix.Configuration}}
-    runs-on: windows-2025-vs2026
+    runs-on: windows-2022
     strategy:
       matrix:
         Configuration: [Release] #[Release, Debug]
@@ -92,7 +92,7 @@ jobs:
         msbuild
         /m "${{env.Solution}}"
         /p:Configuration="${{matrix.Configuration}}"
-        /p:PlatformToolset=v145
+        /p:PlatformToolset=v143
         /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"
         /p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src"
 #/p:Platform="${{matrix.Settings.Platform}}"
