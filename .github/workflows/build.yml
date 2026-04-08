@@ -50,13 +50,13 @@ jobs:
         --recurse-submodules
         --depth 1
 
-    - name: Clone MathGeoLib
-      run: >
-        git
-        clone https://github.com/juj/MathGeoLib
-        "${{github.workspace}}\dependencies\MathGeoLib"
-        --depth 1
-        --recurse-submodules
+#    - name: Clone MathGeoLib
+#      run: >
+#        git
+#        clone https://github.com/juj/MathGeoLib
+#        "${{github.workspace}}\dependencies\MathGeoLib"
+#        --depth 1
+#        --recurse-submodules
 
 #    - name: Clone fmt
 #      run: >
@@ -71,19 +71,18 @@ jobs:
 #      run: |
 #        curl --ssl-revoke-best-effort --create-dirs -L "https://raw.githubusercontent.com/OWNER/REPO/refs/heads/BRANCH/PATH/TO/FILE.EXTENSION" -o "PATH/TO/FILE.EXTENSION"
 
-    - name: Cache vcpkg
-      uses: actions/cache@v5
-      id: cache_vcpkg
-      with:
-        path: C:/vcpkg/installed
-        key: vcpkg
-    - name: vcpkg
-      if: steps.cache_vcpkg.outputs.cache-hit != 'true'
-      run: |
-        vcpkg install glew glfw3 glm fmt tinyobjloader stb --triplet ${{matrix.Settings.Triplet}}
-
-    - name: List vcpkg files
-      run: Get-ChildItem -Path "C:\vcpkg" -File -Recurse | Select-Object FullName
+#    - name: Cache vcpkg
+#      uses: actions/cache@v5
+#      id: cache_vcpkg
+#      with:
+#        path: C:/vcpkg/installed
+#        key: vcpkg
+#    - name: vcpkg
+#      if: steps.cache_vcpkg.outputs.cache-hit != 'true'
+#      run: |
+#        vcpkg install glew glfw3 glm fmt tinyobjloader stb --triplet ${{matrix.Settings.Triplet}}
+#    - name: List vcpkg files
+#      run: Get-ChildItem -Path "C:\vcpkg" -File -Recurse | Select-Object FullName
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
@@ -109,8 +108,8 @@ jobs:
 #        publish "${{github.event.repository.name}}.App/${{github.event.repository.name}}.App.csproj"
 #        -c "${{matrix.Configuration}}"
       
-    - name: List files
-      run: ls -R
+    - name: List build files
+      run: Get-ChildItem -Path "." -File -Recurse | Select-Object FullName
 
 #    - name: Deploy
 #      shell: cmd
