@@ -89,7 +89,7 @@ jobs:
 
     - name: Build
       run: |
-        msbuild /m "${{env.Solution}}" /p:Configuration="${{matrix.Configuration}}" /p:PlatformToolset=v143 /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include" /p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src" /p:AdditionalOptions="/utf-8"
+        msbuild /m "${{env.Solution}}" /p:Configuration="${{matrix.Configuration}}" /p:PlatformToolset=v143 /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include" /p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src" /p:ClOptions=/utf-8
 
 #    - name: Build
 #      run: >
