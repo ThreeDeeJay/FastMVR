@@ -89,9 +89,7 @@ jobs:
 
     - name: Build
       run: |
-        ECHO A "%CL%" "!CL!"
-        SET CL=/utf-8
-        ECHO B "%CL%" "!CL!"
+        set FMT_UNICODE=0
         msbuild /m "${{env.Solution}}" /p:Configuration="${{matrix.Configuration}}" /p:PlatformToolset=v143 /p:IncludePath="C:\vcpkg\installed\${{matrix.Settings.Triplet}}\include"/p:AdditionalIncludePaths="${{github.workspace}}\dependencies\MathGeoLib\src"
 
 #    - name: Build
